@@ -9,6 +9,14 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
+        <?php
+        if (!isset($_COOKIE['User'])) {
+            header("Location: index.php");
+            exit();
+        }
+        ?>
+        
+        <!-- Весь ваш контент из index.html -->
         <div class="container nav_bar">
             <div class="row">
                 <div class="col-3 nav_logo"></div>
@@ -19,7 +27,7 @@
         </div>
         <div class="container">
             <div class="row">
-        		<div class="col-8">
+                <div class="col-8">
                     <p>Привет! Я начинающий веб-разработчик. Эта страница — мой первый шаг в мир создания сайтов.</p>
                     <p>Я увлекаюсь программированием и надеюсь стать профессионалом в этой увлекательной области. В свободное время мне нравится изучать новые технологии, читать книги и заниматься спортом.</p>
         
@@ -35,12 +43,12 @@
                     <div class="row photo"></div>
                     <div class="row"><p class="title_photo">Новоселов Д.А.</p></div>
                 </div>
-        	</div>
+            </div>
         </div>
         <div class="container">
             <div class="row">
                 <div class="button_js col-12">
-                    <button id="myButton">Click me</button> <!-- Исправлен атрибут id -->
+                    <button id="myButton">Click me</button>
                     <p id="demo"></p>
                 </div>
             </div>
