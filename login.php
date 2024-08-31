@@ -24,20 +24,22 @@
             $password = $_POST['password'];
 
             if (!$username || !$password) {
-                die('Please enter both username and password!');
-            }
-
-            // Query the database for the user
-            $sql = "SELECT * FROM users WHERE username='$username' AND pass='$password'";
-            $result = mysqli_query($link, $sql);
-
-            if (mysqli_num_rows($result) == 1) {
-                // Set a cookie and redirect to profile
-                setcookie("User", $username, time() + 7200);
-                header('Location: profile.php');
-                exit();
+                echo '<div class="alert alert-danger" role="alert">Please enter both username and password!</div>';
             } else {
-                echo "Incorrect username or password";
+                // Query the database for the user
+                $sql = "SELECT * FROM users WHERE username='$username' AND pass='$password'";
+                $result = mysqli_query($link, $sql);
+
+                if (mysqli_num_rows($result) == 1) {
+                    // Set a cookie and redirect to profile
+                    setcookie("User", $username, time() + 7200, "/");
+                    header('Location: profile.php');
+                    exit();
+                } else {
+                    echo '<div class="alert alert-danger" role="alert">Incorrect username or password</div>';
+                    header('Refresh: 2; url=login.php');
+                    exit();
+                }
             }
         }
         ?>
