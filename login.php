@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -20,9 +20,15 @@
         <div class="row">
             <div class="col-12">
                 <form method='POST' action='login.php'>
-                    <div class="row form__reg"><input class="form" type="text" name="login" placeholder="Login"></div>
-                    <div class="row form__reg"><input class="form" type="password" name="password" placeholder="Password"></div>
-                    <button type="submit" class="btn_red btn__reg" name="submit" >Login</button>
+                    <div class="row mb-3">
+                        <input class="form-control" type="text" name="login" placeholder="Login">
+                    </div>
+                    <div class="row mb-3">
+                        <input class="form-control" type="password" name="password" placeholder="Password">
+                    </div>
+                    <div class="row">
+                        <button type="submit" class="btn btn-danger" name="submit">Login</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -34,8 +40,14 @@
 require_once('db.php');
 if (isset($_COOKIE['User'])) {
     header("Location: profile.php");
+    exit; 
 }
+
 $link = mysqli_connect('127.0.0.1', 'root', 'kali', 'first');
+
+if (!$link) {
+    die("Connection failed: " . mysqli_connect_error());
+}
 
 if (isset($_POST['submit'])) {
     $username = $_POST['login'];
@@ -44,14 +56,16 @@ if (isset($_POST['submit'])) {
     if (!$username || !$password) die('Please enter both username and password!');
     
     $sql = "SELECT * FROM users WHERE username='$username' AND pass='$password'";
+    $result = mysqli_query($link, $sql);
 
-    $result = mysql_query($link, $sql);
-    
-    if (mysqli_num_rows($result) == 1) {
+    if ($result && mysqli_num_rows($result) == 1) {
         setcookie("User", $username, time() + 3600);
         header('Location: profile.php');
+        exit; 
     } else {
         echo "Incorrect username or password";
     }
 }
+
+mysqli_close($link); 
 ?>
