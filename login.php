@@ -9,41 +9,6 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <?php
-        require_once('db.php');
-
-        // Redirect to profile if the user is already logged in
-        if (isset($_COOKIE['User'])) {
-            header("Location: profile.php");
-            exit();
-        }
-
-        // Handle the login form submission
-        if (isset($_POST['submit'])) {
-            $username = $_POST['login'];
-            $password = $_POST['password'];
-
-            if (!$username || !$password) {
-                echo '<div class="alert alert-danger" role="alert">Please enter both username and password!</div>';
-            } else {
-                // Query the database for the user
-                $sql = "SELECT * FROM users WHERE username='$username' AND pass='$password'";
-                $result = mysqli_query($link, $sql);
-
-                if (mysqli_num_rows($result) == 1) {
-                    // Set a cookie and redirect to profile
-                    setcookie("User", $username, time() + 7200, "/");
-                    header('Location: profile.php');
-                    exit();
-                } else {
-                    echo '<div class="alert alert-danger" role="alert">Incorrect username or password</div>';
-                    header('Refresh: 2; url=login.php');
-                    exit();
-                }
-            }
-        }
-        ?>
-
         <div class="container text-center mt-5">
             <h2>Login</h2>
             <form method='POST' action='/login.php'>
@@ -60,3 +25,46 @@
         </div>
     </body>
 </html>
+
+
+
+
+
+<?php
+require_once('db.php');
+
+// Redirect to profile if the user is already logged in
+if (isset($_COOKIE['User'])) {
+    header("Location: profile.php");
+    exit();
+}
+
+// Handle the login form submission
+if (isset($_POST['submit'])) {
+    $username = $_POST['login'];
+    $password = $_POST['password'];
+
+    if (!$username || !$password) {
+        die('Please enter both username and password!');
+    }
+
+    if (!$username || !$password) {
+        echo '<div class="alert alert-danger" role="alert">Please enter both username and password!</div>';
+    } else {
+        // Query the database for the user
+        $sql = "SELECT * FROM users WHERE username='$username' AND pass='$password'";
+        $result = mysqli_query($link, $sql);
+
+        if (mysqli_num_rows($result) == 1) {
+            // Set a cookie and redirect to profile
+            setcookie("User", $username, time() + 7200);
+            header('Location: profile.php');
+            exit();
+        } else {
+            echo '<div class="alert alert-danger" role="alert">Incorrect username or password</div>';
+            header('Refresh: 2; url=login.php');
+            exit();
+        }
+    }
+}
+?>
