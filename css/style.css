@@ -1,0 +1,41 @@
+body {
+    background-color: #08161e;
+    font-family: 'Courier New', Courier, monospace;
+    color: #00FFFF;
+}
+
+.nav_bar {
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.nav_text {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.col-3.nav_logo {
+    background: url(../image/logo.jpg) no-repeat center center;
+    background-size: 100%;
+    width: 150px;
+    height: 150px;
+}
+
+.photo {
+    background: url(../image/photo.jpg) no-repeat center center;
+    background-size: 100%;
+    width: 350px;
+    height: 350px;
+}
+
+.title_photo {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 18px;
+}
