@@ -4,23 +4,20 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novoselov D.A.</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <?php
-    if (!isset($_COOKIE['User'])) {
-        header("Location: index.php");
-        exit();
-    }
-    ?>
 
+<body>
     <div class="container nav_bar">
         <div class="row">
             <div class="col-3 nav_logo"></div>
-            <div class="col-9">
-                <div class="nav_text">About me</div>
+            <div class="col-9 nav_text">
+                <h1>
+                    About me
+                </h1>
             </div>
         </div>
     </div>
@@ -58,9 +55,9 @@
             </div>
             <div class="col-12">
                 <form method="POST" action="profile.php">
-                    <input type="text" class="form" name="title" placeholder="Title" required>
-                    <textarea name="text" cols="30" rows="10" placeholder="Input text" required></textarea>
-                    <button type="submit" class="btn btn-primary" name="submit">Save post</button>
+                    <input type="text" class="form" name="title" placeholder="Title">
+                    <textarea name="text" cols="30" rows="10" placeholder="Input text"></textarea>
+                    <button type="submit" class="btn_red" name="submit">Save post</button>
                 </form>
             </div>
         </div>
@@ -69,30 +66,24 @@
 </body>
 </html>
 
+
+
 <?php
 require_once('db.php');
+
 $link = mysqli_connect('127.0.0.1', 'root', 'kali', 'first');
 
 if (isset($_POST['submit'])) {
+    
     $title = $_POST['title'];
     $main_text = $_POST['text'];
     
-    if (!$title || !$main_text) {
-        die("Please fill out all fields");
-    }
+    if (!$title || !$main_text) die("Please fill out all fields");
     
-    $title = mysqli_real_escape_string($link, $title);
-    $main_text = mysqli_real_escape_string($link, $main_text);
+    $sql = "INSERT INTO posts (title, main_text) VALUES ('$title', '$main_text')";
     
-    $sql = "INSERT INTO posts (title, content) VALUES ('$title', '$main_text')";
-    
-    if (!mysqli_query($link, $sql)) {
-        die("Failed to add post: " . mysqli_error($link));
-    }
-    
-    // Optionally, redirect or display a success message
+    if (!mysqli_query($link, $sql)) die("Failed to add post: " . mysqli_error($link));
+
     echo "Post added successfully!";
 }
-
-mysqli_close($link);
 ?>

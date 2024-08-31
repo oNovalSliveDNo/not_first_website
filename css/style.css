@@ -4,6 +4,83 @@ body {
     color: #00FFFF;
 }
 
+.container {
+    margin-top: 20px;
+    max-width: 600px; /* Максимальная ширина контейнера */
+    //margin: auto; /* Центрирование */
+    //padding: 20px; /* Внутренние отступы */
+    //background-color: #ffffff; /* Белый фон для формы */
+    //border-radius: 8px; /* Закругленные углы */
+    //box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень */
+}
+
+/* Заголовки */
+h1 {
+    color: #00FFFF; /* Цвет заголовка */
+    margin-bottom: 20px; /* Отступ снизу */
+}
+
+/* Стили для форм */
+.form__reg {
+    margin-bottom: 15px; /* Отступ между полями */
+}
+
+.form {
+    width: 100%; /* Полная ширина поля ввода */
+    padding: 10px; /* Внутренние отступы */
+    border: 1px solid #ccc; /* Граница */
+    border-radius: 5px; /* Закругленные углы */
+    font-size: 16px; /* Размер шрифта */
+}
+
+.form:focus {
+    border-color: #007bff; /* Цвет границы при фокусе */
+    outline: none; /* Убрать контур */
+}
+
+/* Стили для кнопок */
+.btn_red {
+    background-color: #dc3545; /* Цвет кнопки */
+    color: white; /* Цвет текста на кнопке */
+    border: none; /* Убрать границу */
+    padding: 10px 20px; /* Внутренние отступы */
+    border-radius: 5px; /* Закругленные углы */
+    cursor: pointer; /* Курсор в виде указателя */
+    transition: background-color 0.3s; /* Плавный переход цвета */
+}
+
+.btn_red:hover {
+    background-color: #c82333; /* Цвет кнопки при наведении */
+}
+
+/* Сообщения об ошибках */
+.error-message {
+    color: #dc3545; /* Красный цвет для ошибок */
+    margin-top: 10px; /* Отступ сверху */
+}
+
+/*
+было у меня
+
+.col-3.nav_logo {
+    background: url(../image/logo.jpg) no-repeat center center;
+    background-size: 100%;
+    width: 150px;
+    height: 150px;
+}
+
+.photo {
+    background: url(../image/photo.jpg) no-repeat center center;
+    background-size: 100%;
+    width: 300px;
+    height: 300px;
+}
+
+.title_photo {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 18px;
+    
 .nav_bar {
     margin-bottom: 20px;
     font-size: 30px;
@@ -35,26 +112,8 @@ body {
     justify-content: right;
 }
 
-.container {
-    margin-top: 20px;
-}
+*/
 
-.col-3.nav_logo {
-    background: url(../image/logo.jpg) no-repeat center center;
-    background-size: 100%;
-    width: 150px;
-    height: 150px;
-}
 
-.photo {
-    background: url(../image/photo.jpg) no-repeat center center;
-    background-size: 100%;
-    width: 300px;
-    height: 300px;
-}
 
-.title_photo {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 18px;
-}
+
