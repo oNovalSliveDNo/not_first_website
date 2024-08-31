@@ -1,36 +1,31 @@
 <?php
-// Переменные подключения
+// Define the connection variables
 $servername = "127.0.0.1";
 $username = "root";
 $password = "kali";
-$dbName = "first"; 
+$dbName = "first";
 
-// Подключение к серверу базы данных
+// Connect to MySQL server
 $link = mysqli_connect($servername, $username, $password);
 
-// Проверка соединения
+// Check for connection errors
 if (!$link) {
     die("Connection error: " . mysqli_connect_error());
 }
 
-// Создание базы данных, если не существует
+// Create the database if it doesn't exist
 $sql = "CREATE DATABASE IF NOT EXISTS $dbName";
 if (!mysqli_query($link, $sql)) {
-    die("Failed to create a database: " . mysqli_error($link));
+    echo "Failed to create database: " . mysqli_error($link);
 }
 
-// Закрытие текущего соединения
+// Close the initial connection
 mysqli_close($link);
 
-// Подключение к базе данных
+// Connect to the newly created database
 $link = mysqli_connect($servername, $username, $password, $dbName);
 
-// Проверка соединения
-if (!$link) {
-    die("Database connection error: " . mysqli_connect_error());
-}
-
-// Создание таблицы пользователей, если не существует
+// SQL query to create the 'users' table if it doesn't exist
 $sql = "CREATE TABLE IF NOT EXISTS users (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(15) NOT NULL,
@@ -38,19 +33,19 @@ $sql = "CREATE TABLE IF NOT EXISTS users (
     pass VARCHAR(20) NOT NULL
 )";
 if (!mysqli_query($link, $sql)) {
-    die("The Users table could not be created: " . mysqli_error($link));
+    echo "Failed to create the 'users' table: " . mysqli_error($link);
 }
 
-// Создание таблицы постов, если не существует
+// SQL query to create the 'posts' table if it doesn't exist
 $sql = "CREATE TABLE IF NOT EXISTS posts (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(100) NOT NULL,
-    main_text TEXT NOT NULL
+    content TEXT NOT NULL
 )";
 if (!mysqli_query($link, $sql)) {
-    die("The Posts table could not be created: " . mysqli_error($link));
+    echo "Failed to create the 'posts' table: " . mysqli_error($link);
 }
 
-// Закрытие соединения
+// Close the connection to the database
 mysqli_close($link);
 ?>
