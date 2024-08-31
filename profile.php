@@ -4,16 +4,19 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novoselov D.A.</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <?php
+    
+    <?php /*
     if (!isset($_COOKIE['User'])) {
         header("Location: index.php");
         exit();
-    }
+    } */
     ?>
 
     <div class="container nav_bar">
@@ -81,16 +84,15 @@ if (isset($_POST['submit'])) {
         die("Please fill out all fields");
     }
     
-    $title = mysqli_real_escape_string($link, $title);
-    $main_text = mysqli_real_escape_string($link, $main_text);
+    // $title = mysqli_real_escape_string($link, $title);
+    // $main_text = mysqli_real_escape_string($link, $main_text);
     
     $sql = "INSERT INTO posts (title, content) VALUES ('$title', '$main_text')";
     
     if (!mysqli_query($link, $sql)) {
         die("Failed to add post: " . mysqli_error($link));
     }
-    
-    // Optionally, redirect or display a success message
+
     echo "Post added successfully!";
 }
 

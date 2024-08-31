@@ -34,8 +34,20 @@
         if (!$link) {
             die('Connection failed: ' . mysqli_connect_error());
         }
+        
+        $sql = "SELECT * FROM users WHERE username='$username' AND pass='$password'";
 
-        // Use prepared statements to prevent SQL injection
+        $result = mysql_query($link, $sql);
+        
+        if (mysqli_num_rows($result) == 1) {
+            setcookie("User", $username, time() + 3600);
+            header('Location: profile.php');
+            exit();
+        } else {
+            echo "Incorrect username or password";
+        }
+        
+        /*// Use prepared statements to prevent SQL injection
         $stmt = $link->prepare("SELECT * FROM users WHERE username = ? AND pass = ?");
         $stmt->bind_param('ss', $username, $password);
         $stmt->execute();
@@ -51,6 +63,7 @@
         }
 
         $stmt->close();
+        */
         mysqli_close($link);
     }
     ?>
